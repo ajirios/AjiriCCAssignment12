@@ -1,3 +1,5 @@
+-- Q2
+
 CREATE DATABASE pizzaDB;
 
 CREATE TABLE pizzaDB.`customers` (
@@ -35,6 +37,7 @@ CREATE TABLE pizzaDB.`customer_orders` (
     FOREIGN KEY (orderNumber) REFERENCES `orders`(orderNumber)
 );
 
+-- Q3
 
 INSERT INTO pizzaDB.pizzas (pizzaNumber, pizzaName, price) VALUES (1, 'Pepperoni & Cheese', 7.99);
 INSERT INTO pizzaDB.pizzas (pizzaNumber, pizzaName, price) VALUES (2, 'Vegetarian', 9.99);
@@ -59,6 +62,8 @@ INSERT INTO pizzaDB.customer_orders (customerID, orderNumber) VALUES (10000001, 
 INSERT INTO pizzaDB.pizza_orders (orderNumber, pizzaNumber, quantity) VALUES (10003, 3, 1);
 INSERT INTO pizzaDB.pizza_orders (orderNumber, pizzaNumber, quantity) VALUES (10003, 4, 1);
 
+-- Q4
+
 SELECT customers.customerID, customerName, SUM(price * quantity) FROM customers 
 JOIN customer_orders ON customers.customerID = customer_orders.customerID 
 JOIN orders ON customer_orders.orderNumber = orders.orderNumber 
@@ -66,6 +71,7 @@ JOIN pizza_orders ON pizza_orders.orderNumber = orders.orderNumber
 JOIN pizzas ON pizzas.pizzaNumber = pizza_orders.pizzaNumber   
 GROUP BY customers.customerID;
 
+-- Q5
 
 SELECT customers.customerID, customerName, orderDate, SUM(price * quantity) FROM customers 
 JOIN customer_orders ON customers.customerID = customer_orders.customerID 
