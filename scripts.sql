@@ -73,10 +73,9 @@ GROUP BY customers.customerID;
 
 -- Q5
 
-SELECT customers.customerID, customerName, orderDate, SUM(price * quantity) FROM customers 
+SELECT customers.customerID, customerName, CAST(orders.orderDate as DATE), SUM(price * quantity) FROM customers 
 JOIN customer_orders ON customers.customerID = customer_orders.customerID 
 JOIN orders ON customer_orders.orderNumber = orders.orderNumber 
 JOIN pizza_orders ON pizza_orders.orderNumber = orders.orderNumber 
 JOIN pizzas ON pizzas.pizzaNumber = pizza_orders.pizzaNumber 
-GROUP BY customers.customerID
-HAVING orderDate > '2014-10-09 10:00:00';
+GROUP BY customers.customerID, CAST(orders.orderDate as DATE);
